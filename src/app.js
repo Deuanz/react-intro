@@ -7,7 +7,10 @@ export const MovieList = (props) => (
     <ul>
     {props.movies.map((movie, i) => {
         return (
-            <li key={i}>{movie.Title}</li>
+            <li key={i}>
+                <h4>{movie.Title}</h4>
+                <img src={movie.Poster} />
+            </li>
         )
     })}
     </ul>
