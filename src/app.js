@@ -1,36 +1,46 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {SearchForm} from './search-form'
+import axios from 'axios'
 
-const MovieList = (props) => (
+export const MovieList = (props) => (
     <ul>
     {props.movies.map((movie, i) => {
         return (
-            <li key={i}>{movie.title}</li>
+            <li key={i}>{movie.Title}</li>
         )
     })}
     </ul>
 )
 
-const App = () => {
-    const movies = [
-        {
-            title: 'Rogue One: A Star Wars Story'
-        },
-        {
-            title: 'Guardians of the Galaxy Vol. 2'
-        },
-        {
-            title: 'Doctor Strange'
+class App extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            movies: []
         }
-    ]
-    return (
+    }
+
+    onSearch(query) {
+        event.preventDefault()
+        axios.get(`http://www.omdbapi.com/?s=${query}&y=&plot=short&r=json`)
+            .then(response => {
+                const movies = response.data.Search
+                this.setState({
+                    movies: movies
+                })
+            })
+    }
+
+    render() {
+        return (
         <section>
             <h1>Movie Collection</h1>
-            <SearchForm />
-            <MovieList movies={movies} />
+            <SearchForm onSearchSubmit={this.onSearch.bind(this)}/>
+            <MovieList movies={this.state.movies} />
         </section>
     )
+    }
 }
 
 ReactDOM.render(<App />, document.getElementById('app'))
