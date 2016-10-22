@@ -1,10 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+
+function onSearchClick(event) {
+    event.preventDefault()
+    console.log("onSearchClick", event)
+}
 const SearchForm = () => (
     <form>
         <input type="text" />
-        <button>Search</button>
+        <button onClick={onSearchClick}>Search</button>
     </form>
 )
 
