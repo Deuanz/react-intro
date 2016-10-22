@@ -2,17 +2,20 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 
-function onSearchClick(event) {
-    event.preventDefault()
-    console.log("onSearchClick", event)
+class SearchForm extends React.Component {
+    onSearchClick(event) {
+        event.preventDefault()
+        console.log("this.onSearchClick", event)
+    }
+    render () {
+        return (
+            <form>
+                <input type="text" />
+                <button onClick={this.onSearchClick}>Search</button>
+            </form>
+        )
+    }
 }
-const SearchForm = () => (
-    <form>
-        <input type="text" />
-        <button onClick={onSearchClick}>Search</button>
-    </form>
-)
-
 const MovieList = (props) => (
     <ul>
     {props.movies.map((movie, i) => {
