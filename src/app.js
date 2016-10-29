@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {SearchForm} from './search-form'
 import axios from 'axios'
-import { Router, Route, hashHistory, Link } from 'react-router'
+import { Router, Route, hashHistory, Link, IndexRoute } from 'react-router'
 
 export const MovieList = (props) => (
     <ul>
@@ -22,6 +22,9 @@ class Search extends React.Component {
         super(props)
         this.state = {
             movies: []
+        }
+        if(props.location.query.s) {
+            this.onSearch(props.location.query.s)
         }
     }
 
@@ -46,10 +49,41 @@ class Search extends React.Component {
     )
     }
 }
+
+const batmanQuery = {
+    pathname: '/search',
+    query: {
+        s: "batman"
+    }
+}
+
+const avengerQuery = {
+    pathname: '/search',
+    query: {
+        s: "avenger"
+    }
+}
+
+const vampireQuery = {
+    pathname: '/search',
+    query: {
+        s: "vampire"
+    }
+}
+
 const Home = () => (
     <section>
         <h1>This is HOME</h1>
+        <ul>
+            <li><Link to={batmanQuery}>Batman</Link></li>
+            <li><Link to={avengerQuery}>Avenger</Link></li>
+            <li><Link to={vampireQuery}>Vampire</Link></li>
+        </ul>
     </section>
+)
+
+const Detail = () => (
+    <h1>Detail</h1>
 )
 
 const Nav = () => (
@@ -57,6 +91,7 @@ const Nav = () => (
         <ul>
             <li><Link to="/" >HOME</Link></li>
             <li><Link to="/search" >SEARCH</Link></li>
+            <li><Link to="/detail" >DETAIL</Link></li>
         </ul>
     </nav>
 )
@@ -73,6 +108,8 @@ class Main extends React.Component {
         return (
             <Router history={hashHistory}>
                 <Route path="/" component={App} >
+                    <IndexRoute component={Home} />
+                    <Route path="detail" component={Detail} />
                     <Route path="search" component={Search} />
                 </Route>
             </Router>
