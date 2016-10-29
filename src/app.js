@@ -39,7 +39,6 @@ class Search extends React.Component {
     render() {
         return (
         <section>
-            <Nav />
             <h1>Movie Collection</h1>
             <SearchForm onSearchSubmit={this.onSearch.bind(this)}/>
             <MovieList movies={this.state.movies} />
@@ -49,7 +48,6 @@ class Search extends React.Component {
 }
 const Home = () => (
     <section>
-        <Nav />
         <h1>This is HOME</h1>
     </section>
 )
@@ -63,12 +61,20 @@ const Nav = () => (
     </nav>
 )
 
+const App = props => (
+    <section>
+        <Nav />
+        {props.children}
+    </section>
+)
+
 class Main extends React.Component {
     render() {
         return (
             <Router history={hashHistory}>
-                <Route path="/" component={Home} />
-                <Route path="/search" component={Search} />
+                <Route path="/" component={App} >
+                    <Route path="search" component={Search} />
+                </Route>
             </Router>
         )
     }
