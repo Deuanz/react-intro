@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {SearchForm} from './search-form'
 import axios from 'axios'
-import { Router, Route, hashHistory } from 'react-router'
+import { Router, Route, hashHistory, Link } from 'react-router'
 
 export const MovieList = (props) => (
     <ul>
@@ -39,6 +39,7 @@ class Search extends React.Component {
     render() {
         return (
         <section>
+            <Nav />
             <h1>Movie Collection</h1>
             <SearchForm onSearchSubmit={this.onSearch.bind(this)}/>
             <MovieList movies={this.state.movies} />
@@ -47,7 +48,19 @@ class Search extends React.Component {
     }
 }
 const Home = () => (
-    <h1>This is HOME</h1>
+    <section>
+        <Nav />
+        <h1>This is HOME</h1>
+    </section>
+)
+
+const Nav = () => (
+    <nav>
+        <ul>
+            <li><Link to="/" >HOME</Link></li>
+            <li><Link to="/search" >SEARCH</Link></li>
+        </ul>
+    </nav>
 )
 
 class Main extends React.Component {
