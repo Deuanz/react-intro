@@ -82,9 +82,40 @@ const Home = () => (
     </section>
 )
 
-const Detail = () => (
-    <h1>Detail</h1>
-)
+class Detail extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            movie: {
+                Title: 'Unknown'
+            }
+        }
+        if(props.location.query.id) {
+            const id = props.location.query.id
+            axios.get(`http://www.omdbapi.com/?i=${id}&plot=short&r=json`)
+                .then(resposne => {
+                    const movie = resposne.data
+                    this.setState({
+                        movie: movie
+                    })
+                })
+        }
+    }
+    render() {
+        const {Title, Genre, Poster} = this.state.movie
+        return (
+            <section>
+                <h1>{Title}</h1>
+                <small>{Genre}</small>
+                <div>
+                    <img src={Poster} />
+                
+                </div>
+            </section>
+        )
+    }
+}
+
 
 const Nav = () => (
     <nav>
