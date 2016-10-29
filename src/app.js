@@ -46,11 +46,15 @@ class Search extends React.Component {
     )
     }
 }
+const Home = () => (
+    <h1>This is HOME</h1>
+)
 
 class Main extends React.Component {
     render() {
         return (
             <Router history={hashHistory}>
+                <Route path="/" component={Home} />
                 <Route path="/search" component={Search} />
             </Router>
         )
