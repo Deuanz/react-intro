@@ -1,3 +1,5 @@
+import './app.css'
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {SearchForm} from './search-form'
@@ -7,9 +9,16 @@ import { Router, Route, hashHistory, Link, IndexRoute } from 'react-router'
 export const MovieList = (props) => (
     <ul>
     {props.movies.map((movie, i) => {
+        const query = {
+            pathname: '/detail',
+            query: {
+                id: movie.imdbID
+            }
+        }
         return (
             <li key={i}>
                 <h4>{movie.Title}</h4>
+                <h4><Link to={query}>{movie.Title}</Link></h4>
                 <img src={movie.Poster} />
             </li>
         )
@@ -41,7 +50,7 @@ class Search extends React.Component {
 
     render() {
         return (
-        <section>
+        <section style={styles}>
             <h1>Movie Collection</h1>
             <SearchForm onSearchSubmit={this.onSearch.bind(this)}/>
             <MovieList movies={this.state.movies} />
