@@ -1,4 +1,4 @@
-import './app.css'
+import './app.scss'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -50,7 +50,7 @@ class Search extends React.Component {
 
     render() {
         return (
-        <section style={styles}>
+        <section>
             <h1>Movie Collection</h1>
             <SearchForm onSearchSubmit={this.onSearch.bind(this)}/>
             <MovieList movies={this.state.movies} />
