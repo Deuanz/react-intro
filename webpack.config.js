@@ -14,6 +14,11 @@ var config = {
                 query: {
                     presets: ['es2015', 'react']
                 }
+            },
+            {
+                test: /\.css$/,
+                include: path.join(__dirname, 'src'),
+                loaders: ['style', 'css'],
             }
         ]
     },
